@@ -3,35 +3,34 @@ import java.util.*;
 
 // Implement an Iterator class that iterates over every second element in a array 
 
-public class ArrayIterator implements Iterable<Integer>{
+public class ArrayIterator implements Iterable<T>{
  
-  private int[] array;
-  public ArrayIterator(int[] a){
+  private T[] array;
+  public ArrayIterator(T[] a){
+   if (a == null) {
+     return new IllegalArgumentException("Null Array provided");
+   }
     array=a;
   }
   
-  public Iterator<Integer> iterator(){
+  public Iterator<T> iterator(){
     return new InnerIterator();
   }
   
-  private class InnerIterator implements Iterator<Integer>{
-    
-    
-    int i=0;
-    
-    
+  private class InnerIterator implements Iterator<T>{
+    int i = 0;
     public boolean hasNext(){
-      
       if(i>=array.length){
         return false;
       }
       
       return true;
-      
     }
     
-    public Integer next(){
-      
+    public T next(){
+      if (!hasNext()) {
+        //exception.
+      }
       int res=array[i];
       i+=2;
       return res;
